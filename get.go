@@ -32,5 +32,9 @@ func GetBool(req *go_http.Request, param string) (bool, error) {
 		return false, err
 	}
 
+	if str_value == "" {
+		return false, nil
+	}
+
 	return strconv.ParseBool(str_value)
 }
