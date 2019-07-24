@@ -23,3 +23,14 @@ func GetInt64(req *go_http.Request, param string) (int64, error) {
 
 	return strconv.ParseInt(str_value, 10, 64)
 }
+
+func GetBool(req *go_http.Request, param string) (bool, error) {
+
+	str_value, err := GetString(req, param)
+
+	if err != nil {
+		return false, err
+	}
+
+	return strconv.ParseBool(str_value)
+}
