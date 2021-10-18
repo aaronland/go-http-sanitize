@@ -6,30 +6,26 @@ import (
 	"strconv"
 )
 
-func PostString(req *go_http.Request, param string) (string, error) {
+func HeaderString(req *go_http.Request, param string) (string, error) {
 
-	raw_value := req.PostFormValue(param)
+	raw_value := req.Header.Get(param)
 	return wof_sanitize.SanitizeString(raw_value, sn_opts)
 }
 
-func PostInt64(req *go_http.Request, param string) (int64, error) {
+func HeaderInt64(req *go_http.Request, param string) (int64, error) {
 
-	str_value, err := PostString(req, param)
+	str_value, err := HeaderString(req, param)
 
 	if err != nil {
 		return -1, err
 	}
 
-	if str_value == "" {
-		return 0, nil
-	}
-
 	return strconv.ParseInt(str_value, 10, 64)
 }
 
-func PostBool(req *go_http.Request, param string) (bool, error) {
+func HeaderBool(req *go_http.Request, param string) (bool, error) {
 
-	str_value, err := PostString(req, param)
+	str_value, err := HeaderString(req, param)
 
 	if err != nil {
 		return false, err
