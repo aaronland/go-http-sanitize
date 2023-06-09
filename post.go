@@ -13,6 +13,21 @@ func PostString(req *http.Request, param string) (string, error) {
 	return wof_sanitize.SanitizeString(raw_value, sn_opts)
 }
 
+func PostInt(req *http.Request, param string) (int, error) {
+
+	str_value, err := PostString(req, param)
+
+	if err != nil {
+		return 0, err
+	}
+
+	if str_value == "" {
+		return 0, nil
+	}
+
+	return strconv.Atoi(str_value)
+}
+
 func PostInt64(req *http.Request, param string) (int64, error) {
 
 	str_value, err := PostString(req, param)

@@ -16,6 +16,18 @@ func RequestString(req *http.Request, param string) (string, error) {
 
 }
 
+func RequestInt(req *http.Request, param string) (int, error) {
+
+	switch req.Method {
+
+	case "POST":
+		return PostInt(req, param)
+	default:
+		return GetInt(req, param)
+	}
+
+}
+
 func RequestInt64(req *http.Request, param string) (int64, error) {
 
 	switch req.Method {
